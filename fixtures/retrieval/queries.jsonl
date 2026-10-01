@@ -1,0 +1,17 @@
+{"id": "q-00", "input": "How long are database backups kept?", "expected": ["rb-backup"], "meta": {"critical": true}}
+{"id": "q-01", "input": "Steps to restore the database from a snapshot", "expected": ["rb-restore", "rb-backup"], "meta": {"critical": true}}
+{"id": "q-02", "input": "What happens if certificate renewal fails?", "expected": ["rb-cert"], "meta": {"critical": true}}
+{"id": "q-03", "input": "Disk is almost full, what should I check first?", "expected": ["rb-disk", "rb-logs"], "meta": {"critical": true}}
+{"id": "q-04", "input": "How do I roll back a bad deploy?", "expected": ["rb-rollback", "rb-deploy"], "meta": {"critical": true}}
+{"id": "q-05", "input": "The job queue is backed up", "expected": ["rb-queue"], "meta": {"critical": false}}
+{"id": "q-06", "input": "Is it safe to purge the cache at peak?", "expected": ["rb-cache"], "meta": {"critical": false}}
+{"id": "q-07", "input": "When should I lower the DNS TTL?", "expected": ["rb-dns"], "meta": {"critical": false}}
+{"id": "q-08", "input": "What does HTTP 429 mean for our API?", "expected": ["rb-rate"], "meta": {"critical": false}}
+{"id": "q-09", "input": "Who do I escalate to if on-call doesn't respond?", "expected": ["rb-oncall"], "meta": {"critical": true}}
+{"id": "q-10", "input": "A key leaked into git, what do I do?", "expected": ["rb-secrets"], "meta": {"critical": true}}
+{"id": "q-11", "input": "How should I run a destructive schema change?", "expected": ["rb-migrate"], "meta": {"critical": true}}
+{"id": "q-12", "input": "Worker memory keeps climbing", "expected": ["rb-memory"], "meta": {"critical": false}}
+{"id": "q-13", "input": "Scheduled jobs stopped running overnight on the build machine", "expected": ["rb-sleep", "rb-heartbeat"], "meta": {"critical": true}}
+{"id": "q-14", "input": "What do we do with a flaky test?", "expected": ["rb-flaky"], "meta": {"critical": false}}
+{"id": "q-15", "input": "Spend jumped on one service this month", "expected": ["rb-cost"], "meta": {"critical": false}}
+{"id": "q-16", "input": "Can people search while the index rebuilds?", "expected": ["rb-index"], "meta": {"critical": false}}

@@ -1,0 +1,20 @@
+{"id": "rb-backup", "text": "Nightly database backup runs at 02:00 and is kept for 14 days. Restore with the restore-snapshot procedure."}
+{"id": "rb-restore", "text": "Restore-snapshot procedure: stop writers, pick a snapshot by timestamp, restore to a scratch database, verify row counts, then swap."}
+{"id": "rb-cert", "text": "TLS certificates renew automatically 30 days before expiry. If renewal fails, the expiry alarm fires 7 days out."}
+{"id": "rb-disk", "text": "Disk usage alarm fires at 85 percent. First check log rotation, then old build artifacts, then temp upload folders."}
+{"id": "rb-logs", "text": "Log rotation keeps 7 compressed daily files per service. Rotation failures usually mean a full disk or a permissions change."}
+{"id": "rb-deploy", "text": "Deploys run from the main branch after tests pass. A deploy can be rolled back by redeploying the previous build."}
+{"id": "rb-rollback", "text": "Rollback: find the last green build, redeploy it, then confirm the version endpoint reports the old build id."}
+{"id": "rb-queue", "text": "If the job queue backs up, check for one long-running job starving the workers before adding more workers."}
+{"id": "rb-cache", "text": "Cache keys expire after one hour. Purging the whole cache during peak traffic causes a load spike on the database."}
+{"id": "rb-dns", "text": "DNS changes can take up to 48 hours to propagate. Lower the record TTL a day before a planned migration."}
+{"id": "rb-rate", "text": "API rate limit is 100 requests per minute per key. Bursts above the limit receive HTTP 429 with a retry-after header."}
+{"id": "rb-oncall", "text": "On-call rotation changes every Monday at 09:00. Escalate to the secondary after 15 minutes without acknowledgement."}
+{"id": "rb-secrets", "text": "Secrets live in the secrets manager, never in the repository. Rotate a leaked key first, then purge it from history."}
+{"id": "rb-migrate", "text": "Schema migrations run before the new code starts. Destructive migrations require a two-step expand then contract rollout."}
+{"id": "rb-memory", "text": "Memory alarm at 90 percent. Look for a worker that never releases memory; restarting the worker is the short-term fix."}
+{"id": "rb-sleep", "text": "Build hosts must not sleep. A sleeping host silently stops running scheduled jobs until someone wakes it."}
+{"id": "rb-heartbeat", "text": "Every scheduled job writes a heartbeat. A separate monitor alarms when a heartbeat is older than twice the schedule interval."}
+{"id": "rb-flaky", "text": "A flaky test is quarantined with an owner and a ticket, never deleted. Quarantine expires after 14 days."}
+{"id": "rb-cost", "text": "Monthly cloud cost review compares spend to the budget; any service growing more than 20 percent month over month gets a ticket."}
+{"id": "rb-index", "text": "Search index rebuild takes about 40 minutes. Queries during a rebuild read the previous index until the swap."}

@@ -1,0 +1,65 @@
+{
+  "name": "substance",
+  "dataset": "../fixtures/substance/substance.jsonl",
+  "cassette": "../fixtures/cassettes/substance.jsonl",
+  "labels": [
+    "yes",
+    "no"
+  ],
+  "system": "You classify web page text. Answer the question about the page. Reply with JSON only: {\"label\": \"yes\" | \"no\", \"confidence\": <0..1 probability your label is correct>}",
+  "template": "QUESTION: Does this page give a reader specific, usable information (concrete numbers, times, prices, steps, or named details they could act on)? Generic praise, boilerplate, or specific-sounding copy with no actual data is \"no\".\n\nPAGE:\n{text}",
+  "scoring": {
+    "floor_per_class": 10,
+    "calibrate_split": "calibrate",
+    "precision_threshold": 0.9
+  },
+  "reference": "claude-sonnet-4.5",
+  "baselines": [
+    "majority",
+    "random"
+  ],
+  "bar": {
+    "macro_f1": {
+      "min_vs_reference": -0.03
+    },
+    "error_rate": {
+      "max": 0.02
+    }
+  },
+  "candidates": [
+    {
+      "name": "claude-sonnet-4.5",
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5",
+      "input_per_mtok": 3.0,
+      "output_per_mtok": 15.0,
+      "params": {
+        "max_tokens": 200
+      }
+    },
+    {
+      "name": "claude-haiku-4.5",
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5",
+      "input_per_mtok": 1.0,
+      "output_per_mtok": 5.0,
+      "params": {
+        "max_tokens": 200
+      }
+    },
+    {
+      "name": "qwen3-32b-local",
+      "provider": "ollama",
+      "model": "qwen3:32b",
+      "params": {
+        "think": false
+      }
+    },
+    {
+      "name": "gemma3-27b-local",
+      "provider": "ollama",
+      "model": "gemma3:27b"
+    }
+  ],
+  "results_dir": "../results"
+}

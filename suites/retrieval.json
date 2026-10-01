@@ -1,0 +1,7 @@
+{
+  "name": "retrieval",
+  "dataset": "../fixtures/retrieval/queries.jsonl",
+  "corpus": "../fixtures/retrieval/corpus.jsonl",
+  "k": 3,
+  "results_dir": "../results"
+}

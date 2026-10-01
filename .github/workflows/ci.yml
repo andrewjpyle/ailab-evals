@@ -1,0 +1,59 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  secret-scan:
+    name: secret-scan (required)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: gitleaks (full history)
+        run: |
+          curl -sSfL https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz | tar -xz gitleaks
+          ./gitleaks git --redact --no-banner --exit-code 1 .
+      - name: privacy deny-list
+        run: python3 scripts/denylist_check.py
+
+  test:
+    runs-on: ubuntu-latest
+    needs: secret-scan
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - run: uv sync --locked --group dev
+      - run: uv run ruff check .
+      - run: uv run pytest -q
+
+  eval-gate:
+    name: eval regression gate (replay, no network)
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - run: uv sync --locked
+      - name: replay every suite from cassettes
+        run: |
+          for s in substance judge pairwise retrieval; do
+            uv run ailab-evals $( [ $s = substance ] && echo run || echo $s ) suites/$s.json --out /tmp/ci/$s
+          done
+      - name: gate each candidate against the committed baseline
+        run: |
+          for f in results/substance/*.json; do
+            uv run ailab-evals gate "/tmp/ci/substance/$(basename "$f")" "$f" --tolerances suites/tolerances.json
+          done
+      - name: committed tables match a fresh replay
+        run: |
+          for s in substance judge pairwise retrieval; do diff -u results/$s/table.md /tmp/ci/$s/table.md; done

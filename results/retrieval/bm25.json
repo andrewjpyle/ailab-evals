@@ -1,0 +1,291 @@
+{
+  "candidate": "bm25",
+  "dataset": "retrieval",
+  "dataset_sha256": "2224850263c85f28b613393315208cdbcf39c2183c1a7010528bf20e736d3295",
+  "metrics": {
+    "n": 17,
+    "k": 3,
+    "recall@3": 0.9411764705882353,
+    "hit@3": 1.0,
+    "mrr": 1.0,
+    "ndcg@3": 0.9544879050312304,
+    "critical_n": 9,
+    "critical_recall@3": 0.8888888888888888,
+    "error_rate": 0.0,
+    "cost_usd_per_1k": 0.0,
+    "misses": [
+      {
+        "id": "q-04",
+        "missing": [
+          "rb-rollback"
+        ]
+      },
+      {
+        "id": "q-13",
+        "missing": [
+          "rb-heartbeat"
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "harness_version": "0.1.0",
+    "wall_seconds": 0.0,
+    "finished_at": "2026-10-01T21:14:30+00:00"
+  },
+  "predictions": [
+    {
+      "example_id": "q-00",
+      "output": [
+        "rb-backup",
+        "rb-queue",
+        "rb-cache"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-01",
+      "output": [
+        "rb-restore",
+        "rb-backup",
+        "rb-dns"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-02",
+      "output": [
+        "rb-cert",
+        "rb-queue"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-03",
+      "output": [
+        "rb-disk",
+        "rb-logs",
+        "rb-queue"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-04",
+      "output": [
+        "rb-deploy",
+        "rb-heartbeat",
+        "rb-flaky"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-05",
+      "output": [
+        "rb-queue",
+        "rb-heartbeat",
+        "rb-dns"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-06",
+      "output": [
+        "rb-cache",
+        "rb-secrets",
+        "rb-oncall"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-07",
+      "output": [
+        "rb-dns",
+        "rb-heartbeat",
+        "rb-rollback"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-08",
+      "output": [
+        "rb-rate",
+        "rb-logs",
+        "rb-backup"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-09",
+      "output": [
+        "rb-oncall",
+        "rb-cert",
+        "rb-dns"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-10",
+      "output": [
+        "rb-secrets",
+        "rb-rate",
+        "rb-heartbeat"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-11",
+      "output": [
+        "rb-migrate",
+        "rb-logs",
+        "rb-deploy"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-12",
+      "output": [
+        "rb-memory",
+        "rb-logs"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-13",
+      "output": [
+        "rb-sleep",
+        "rb-rollback",
+        "rb-queue"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-14",
+      "output": [
+        "rb-flaky",
+        "rb-rate",
+        "rb-backup"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-15",
+      "output": [
+        "rb-cost",
+        "rb-cache",
+        "rb-oncall"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    },
+    {
+      "example_id": "q-16",
+      "output": [
+        "rb-index",
+        "rb-deploy",
+        "rb-dns"
+      ],
+      "raw": "",
+      "confidence": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0,
+      "error": null
+    }
+  ]
+}

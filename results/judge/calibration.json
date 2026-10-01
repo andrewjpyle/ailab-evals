@@ -1,0 +1,50 @@
+{
+  "claude-sonnet-4.5": {
+    "n": 112,
+    "agreement": 0.9732142857142857,
+    "kappa": 0.9457364341085271,
+    "false_pass_rate": 0.046875,
+    "false_fail_rate": 0.0,
+    "judge_error_rate": 0.0,
+    "score_spearman": null,
+    "trusted": true,
+    "min_kappa": 0.6,
+    "max_false_pass": 0.1
+  },
+  "claude-haiku-4.5": {
+    "n": 112,
+    "agreement": 0.9821428571428571,
+    "kappa": 0.9637305699481864,
+    "false_pass_rate": 0.03125,
+    "false_fail_rate": 0.0,
+    "judge_error_rate": 0.0,
+    "score_spearman": null,
+    "trusted": true,
+    "min_kappa": 0.6,
+    "max_false_pass": 0.1
+  },
+  "qwen3-32b-local": {
+    "n": 112,
+    "agreement": 0.9642857142857143,
+    "kappa": 0.9274611398963731,
+    "false_pass_rate": 0.046875,
+    "false_fail_rate": 0.020833333333333332,
+    "judge_error_rate": 0.0,
+    "score_spearman": null,
+    "trusted": true,
+    "min_kappa": 0.6,
+    "max_false_pass": 0.1
+  },
+  "gemma3-27b-local": {
+    "n": 112,
+    "agreement": 0.9196428571428571,
+    "kappa": 0.8396946564885496,
+    "false_pass_rate": 0.140625,
+    "false_fail_rate": 0.0,
+    "judge_error_rate": 0.0,
+    "score_spearman": null,
+    "trusted": false,
+    "min_kappa": 0.6,
+    "max_false_pass": 0.1
+  }
+}
