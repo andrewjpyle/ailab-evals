@@ -57,7 +57,7 @@ Each pair is judged twice, with A/B swapped. A winner has to win in both orders,
   measured.
 
 ### 3. Cheapest model that passes: binary "does this page have substance?" classification
-The bar is written before the run: macro-F1 no more than 3 points below the reference (Sonnet). There are 40
+The bar is written before the run: macro-F1 no more than 3 points below the reference (Sonnet), **and** its lower 95% CI above the `random` baseline's upper CI. A bar defined only relative to a reference is only as strong as that reference. There are 40
 scored rows, and 20 more held out for calibration.
 
 | candidate | n | accuracy | macro-F1 | 95% CI | ECE | error rate | $ / 1k | p50 ms | bar |

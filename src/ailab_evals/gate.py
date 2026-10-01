@@ -32,11 +32,21 @@ class BarCheck:
     failures: list[str] = field(default_factory=list)
 
 
-def check_bar(result: RunResult, bar: dict[str, dict[str, float]], reference: RunResult | None = None) -> BarCheck:
+def check_bar(
+    result: RunResult,
+    bar: dict[str, dict],
+    reference: RunResult | None = None,
+    others: dict[str, RunResult] | None = None,
+) -> BarCheck:
     """Every bar metric must be present and numeric; missing / ``"INSUFFICIENT"`` is a failure, not a pass.
 
-    Rules per metric: ``min`` / ``max`` (absolute) and ``min_vs_reference`` (relative to the same
-    metric on ``reference``, e.g. ``-0.03`` = no more than 3 points below the reference model).
+    Rules per metric:
+      * ``min`` / ``max`` — absolute.
+      * ``min_vs_reference`` — relative to the same metric on ``reference`` (``-0.03`` = at most 3 points below).
+        A relative bar is only as strong as the reference, so pair it with an absolute rule.
+      * ``ci_above`` — name of another candidate (usually a baseline such as ``"random"``): this candidate's
+        lower 95% CI (``<metric>_ci95[0]``) must exceed that candidate's upper CI. "Distinguishably better
+        than chance", without picking a magic number.
     """
     failures = []
     for metric, rule in bar.items():
@@ -54,6 +64,14 @@ def check_bar(result: RunResult, bar: dict[str, dict[str, float]], reference: Ru
                 failures.append(f"{metric}: reference value unavailable ({ref})")
             elif val < ref + rule["min_vs_reference"]:
                 failures.append(f"{metric}={val:.4f} < reference {ref:.4f}{rule['min_vs_reference']:+}")
+        if "ci_above" in rule:
+            other = (others or {}).get(rule["ci_above"])
+            mine = _get(result.metrics, f"{metric}_ci95")
+            theirs = _get(other.metrics, f"{metric}_ci95") if other else None
+            if not mine or not theirs:
+                failures.append(f"{metric}: CI vs {rule['ci_above']!r} unavailable")
+            elif mine[0] <= theirs[1]:
+                failures.append(f"{metric} CI low {mine[0]:.3f} <= {rule['ci_above']} CI high {theirs[1]:.3f}")
     return BarCheck(result.candidate, not failures, failures)
 
 
@@ -81,7 +99,8 @@ def cheapest_passing(
     if reference and ref is None:
         raise ValueError(f"reference candidate {reference!r} not in results")
     eligible = [r for r in results if r.candidate not in set(exclude)]
-    checks = {r.candidate: check_bar(r, bar, ref) for r in eligible}
+    by_name = {r.candidate: r for r in results}
+    checks = {r.candidate: check_bar(r, bar, ref, by_name) for r in eligible}
     ranked = sorted(
         ((r.candidate, float(_get(r.metrics, cost_metric) or 0.0), checks[r.candidate].passed) for r in eligible),
         key=lambda t: (t[1], t[0]),

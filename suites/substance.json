@@ -20,7 +20,8 @@
   ],
   "bar": {
     "macro_f1": {
-      "min_vs_reference": -0.03
+      "min_vs_reference": -0.03,
+      "ci_above": "random"
     },
     "error_rate": {
       "max": 0.02

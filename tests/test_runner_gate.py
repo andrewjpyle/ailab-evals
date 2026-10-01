@@ -136,3 +136,19 @@ def test_calibration_floor_blocks_platt_and_precision():
     assert res.metrics["platt"] == "INSUFFICIENT"
     assert "precision_at_threshold" not in res.metrics
     assert check_bar(res, {"precision_at_threshold": {"min": 0.9}}).passed is False
+
+
+def test_ci_above_baseline_rejects_a_candidate_indistinguishable_from_random():
+    ds = _ds(n_yes=30, n_no=30)
+    noisy = {f"yes{i}" for i in range(4, 16)} | {f"no{i}" for i in range(4, 16)}  # ~half wrong
+    results = [
+        run(ds, oracle("ref", flip=noisy, cost=0.01), config=CFG),
+        run(ds, oracle("good", flip={"yes5"}, cost=0.001), config=CFG),
+        run(ds, oracle("coinflip", flip=noisy, cost=0.0), config=CFG),
+        run(ds, oracle("random", flip=noisy), config=CFG),
+    ]
+    bar = {"macro_f1": {"min_vs_reference": -0.03, "ci_above": "random"}}
+    sel = cheapest_passing(results, bar, reference="ref", exclude=["random"])
+    # coinflip is cheapest and within tolerance of the weak reference, but not distinguishable from random
+    assert sel.winner == "good"
+    assert any("CI low" in f for c in sel.checks if c.candidate == "coinflip" for f in c.failures)
