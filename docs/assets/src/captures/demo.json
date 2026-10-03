@@ -1,0 +1,14 @@
+{
+  "name": "demo",
+  "command": [
+    "make",
+    "demo"
+  ],
+  "exit_code": 0,
+  "captured_at": "2026-10-03T04:22:26+00:00",
+  "commit": "043a69313f7a8e032c4492b634e01c64b246d349",
+  "line_count": 30,
+  "env_passed": [],
+  "note": "",
+  "output": "uv run ailab-evals run suites/substance.json --out /tmp/ailab-demo/substance\n| candidate | n | accuracy | macro-F1 | 95% CI | ECE | error rate | $ / 1k | p50 ms | bar |\n|---|---:|---:|---:|---|---:|---:|---:|---:|---|\n| majority | 40 | 0.500 | 0.333 | [0.26, 0.39] | 0.500 | 0.000 | 0.0000 | 0 | baseline |\n| random | 40 | 0.575 | 0.575 | [0.42, 0.72] | 0.075 | 0.000 | 0.0000 | 0 | baseline |\n| gemma3-27b-local | 40 | 1.000 | 1.000 | [1.00, 1.00] | 0.053 | 0.000 | 0.0000 | 4942 | **PASS** \u2705 cheapest passing |\n| qwen3-32b-local | 40 | 1.000 | 1.000 | [1.00, 1.00] | 0.060 | 0.000 | 0.0000 | 3617 | **PASS** |\n| claude-haiku-4.5 | 40 | 1.000 | 1.000 | [1.00, 1.00] | 0.039 | 0.000 | 0.7701 | 1571 | **PASS** |\n| claude-sonnet-4.5 | 40 | 1.000 | 1.000 | [1.00, 1.00] | 0.035 | 0.000 | 1.8878 | 3055 | reference |\n\n**Cheapest model that passes the bar: `gemma3-27b-local`.**\nuv run ailab-evals judge suites/judge.json --out /tmp/ailab-demo/judge\n| judge | n | agreement | Cohen's \u03ba | false-pass | false-fail | trusted |\n|---|---:|---:|---:|---:|---:|---|\n| claude-sonnet-4.5 | 112 | 0.973 | 0.946 | 0.047 | 0.000 | yes |\n| claude-haiku-4.5 | 112 | 0.982 | 0.964 | 0.031 | 0.000 | yes |\n| qwen3-32b-local | 112 | 0.964 | 0.927 | 0.047 | 0.021 | yes |\n| gemma3-27b-local | 112 | 0.920 | 0.840 | 0.141 | 0.000 | NO |\nuv run ailab-evals pairwise suites/pairwise.json --out /tmp/ailab-demo/pairwise\n| system | games | wins | losses | ties | win rate | Bradley-Terry |\n|---|---:|---:|---:|---:|---:|---:|\n| detailed | 32 | 17 | 0 | 15 | 0.766 | 1159.7 |\n| concise | 32 | 14 | 7 | 11 | 0.609 | 1068.7 |\n| confident_wrong | 32 | 0 | 24 | 8 | 0.125 | 771.7 |\n\nJudge `claude-haiku-4.5` position-consistency: 70.8% of comparisons.\nuv run ailab-evals retrieval suites/retrieval.json --out /tmp/ailab-demo/retrieval\n| retriever | n | recall@3 | hit@3 | MRR | nDCG@3 | critical recall@3 |\n|---|---:|---:|---:|---:|---:|---:|\n| bm25 | 17 | 0.941 | 1.000 | 1.000 | 0.954 | 0.889 |\n"
+}
