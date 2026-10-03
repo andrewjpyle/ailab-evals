@@ -57,13 +57,6 @@ jobs:
       - name: committed tables match a fresh replay
         run: |
           for s in substance judge pairwise retrieval; do diff -u results/$s/table.md /tmp/ci/$s/table.md; done
-      - name: emit eval_results.json (schema v1) for the host console
-        run: uv run python scripts/emit_eval_results.py /tmp/ci/substance suites/substance.json /tmp/ci/eval_results.json
-      - uses: actions/upload-artifact@v4
-        with:
-          name: eval-results
-          path: /tmp/ci/eval_results.json
-          if-no-files-found: error
       - name: emit a schema-1 eval_results.json artifact for downstream dashboards
         run: python3 scripts/ci_eval_results.py --out eval_results.json
       - uses: actions/upload-artifact@v4
