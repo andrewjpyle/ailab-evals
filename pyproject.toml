@@ -23,6 +23,9 @@ packages = ["src/ailab_evals"]
 [tool.ruff]
 line-length = 132
 target-version = "py311"
+# docs/assets holds the vendored README-graphics kit (long inline HTML/CSS strings).
+# It is build tooling, not shipped code, so it is excluded from linting the package.
+extend-exclude = ["docs/assets"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
